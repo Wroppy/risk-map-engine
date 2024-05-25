@@ -14,9 +14,9 @@ public class CountryInfoEngine {
   }
 
   /**
-   * Puts all the countries in the
+   * Puts all the countries in the map.
    *
-   * @param countries
+   * @param countries the countries in string format of [name],[continent],[taxFees]
    */
   private void parseCountries(List<String> countries) {
     // Loops through all the country strings
@@ -32,5 +32,15 @@ public class CountryInfoEngine {
 
       this.countryInfos.put(name, countryInfo); // Adds it to the map
     }
+  }
+
+  /**
+   * Given the country name, returns the country info message.
+   *
+   * @param countryName the country name
+   * @return the string of the country info
+   */
+  public String getCountryInfo(String countryName) {
+    return this.countryInfos.get(countryName).toString();
   }
 }

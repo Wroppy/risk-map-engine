@@ -1,6 +1,7 @@
 package nz.ac.auckland.se281;
 
 import java.util.List;
+import java.util.Scanner;
 import nz.ac.auckland.se281.countryinfoengine.CountryInfoEngine;
 
 /** This class is the main entry point. */
@@ -22,7 +23,11 @@ public class MapEngine {
 
   /** this method is invoked when the user run the command info-country. */
   public void showInfoCountry() {
-    // add code here
+    MessageCli.INSERT_COUNTRY.printMessage();
+
+    String countryInfo = Utils.scanner.nextLine();
+
+    System.out.println(this.countryInfoEngine.getCountryInfo(countryInfo));
   }
 
   /** this method is invoked when the user run the command route. */
