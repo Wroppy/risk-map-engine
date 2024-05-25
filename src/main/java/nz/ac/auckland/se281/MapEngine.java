@@ -25,9 +25,9 @@ public class MapEngine {
   public void showInfoCountry() {
     MessageCli.INSERT_COUNTRY.printMessage();
 
-    String countryInfo = Utils.scanner.nextLine();
-
-    System.out.println(this.countryInfoEngine.getCountryInfo(countryInfo));
+    String countryName = Utils.scanner.nextLine();
+    String capitalizedCountryName = Utils.capitalizeFirstLetterOfEachWord(countryName);
+    System.out.println(this.countryInfoEngine.getCountryInfo(capitalizedCountryName));
   }
 
   /** this method is invoked when the user run the command route. */
