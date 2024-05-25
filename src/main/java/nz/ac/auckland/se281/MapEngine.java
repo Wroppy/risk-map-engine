@@ -2,11 +2,11 @@ package nz.ac.auckland.se281;
 
 import java.util.List;
 import nz.ac.auckland.se281.countryinfoengine.Country;
-import nz.ac.auckland.se281.countryinfoengine.CountryInfoEngine;
+import nz.ac.auckland.se281.countryinfoengine.CountryEngine;
 
 /** This class is the main entry point. */
 public class MapEngine {
-  private CountryInfoEngine countryInfoEngine;
+  private CountryEngine countryInfoEngine;
 
   public MapEngine() {
     // add other code here if you want
@@ -18,10 +18,13 @@ public class MapEngine {
     List<String> countries = Utils.readCountries();
     List<String> adjacencies = Utils.readAdjacencies();
     // add code here to create your data structures
-    this.countryInfoEngine = new CountryInfoEngine(countries);
+    this.countryInfoEngine = new CountryEngine(countries);
   }
 
-  /** this method is invoked when the user run the command info-country. */
+  /**
+   * Asks the user for a country on the map. Then displays the name, continent and tax fees
+   * associated with it.
+   */
   public void showInfoCountry() {
     MessageCli.INSERT_COUNTRY.printMessage();
 
@@ -29,14 +32,22 @@ public class MapEngine {
     System.out.println(country.toString());
   }
 
+  /**
+   * Asks the user for a valid country in the list of countries in the command line.
+   *
+   * @return the country associated with the user input
+   */
   public Country getCountryScanner() {
-    while (true) {
+    while (true) { // Loops until the user gets a valid country
       try {
+        // Gets the user input
         String userInput = Utils.scanner.nextLine();
         String cappedInput = Utils.capitalizeFirstLetterOfEachWord(userInput);
 
+        // Returns the country represented by the Country class
         return this.countryInfoEngine.getCountry(cappedInput);
       } catch (CountryNotFoundException e) {
+        // Prints out the error message given.
         System.out.println(e.toString());
       }
     }

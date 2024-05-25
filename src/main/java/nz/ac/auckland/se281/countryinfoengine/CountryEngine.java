@@ -6,10 +6,15 @@ import java.util.Map;
 import nz.ac.auckland.se281.CountryNotFoundException;
 
 /** This class handles parsing the country data and printing the country info. */
-public class CountryInfoEngine {
+public class CountryEngine {
   private Map<String, Country> countryInfos;
 
-  public CountryInfoEngine(List<String> countries) {
+  /**
+   * Sets up initial class attributes.
+   *
+   * @param countries the list of countries in the format of [name],[continent],[taxFees]
+   */
+  public CountryEngine(List<String> countries) {
     countryInfos = new HashMap<>();
     this.parseCountries(countries);
   }
