@@ -17,8 +17,8 @@ public class MapEngine {
   private void loadMap() {
     List<String> countries = Utils.readCountries();
     List<String> adjacencies = Utils.readAdjacencies();
-    // add code here to create your data structures
-    this.countryInfoEngine = new CountryEngine(countries);
+
+    this.countryInfoEngine = new CountryEngine(countries, adjacencies);
   }
 
   /**

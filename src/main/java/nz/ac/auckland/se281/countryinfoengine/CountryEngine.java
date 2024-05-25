@@ -8,14 +8,17 @@ import nz.ac.auckland.se281.CountryNotFoundException;
 /** This class handles parsing the country data and printing the country info. */
 public class CountryEngine {
   private Map<String, Country> countryInfos;
+  private CountryGraph countryGraph;
 
   /**
    * Sets up initial class attributes.
    *
    * @param countries the list of countries in the format of [name],[continent],[taxFees]
+   * @param adjacencies
    */
-  public CountryEngine(List<String> countries) {
+  public CountryEngine(List<String> countries, List<String> adjacencies) {
     countryInfos = new HashMap<>();
+    this.countryGraph = new CountryGraph(adjacencies);
     this.parseCountries(countries);
   }
 
