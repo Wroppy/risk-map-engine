@@ -3,12 +3,11 @@ package nz.ac.auckland.se281.countryinfoengine;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import nz.ac.auckland.se281.CountryNotFoundException;
 
 /** This class handles parsing the country data and printing the country info. */
 public class CountryInfoEngine {
-  private Map<String, CountryInfo> countryInfos;
+  private Map<String, Country> countryInfos;
 
   public CountryInfoEngine(List<String> countries) {
     countryInfos = new HashMap<>();
@@ -30,7 +29,7 @@ public class CountryInfoEngine {
       String continent = countryData[1];
       int taxFee = Integer.parseInt(countryData[2]);
 
-      CountryInfo countryInfo = new CountryInfo(name, continent, taxFee);
+      Country countryInfo = new Country(name, continent, taxFee);
 
       this.countryInfos.put(name, countryInfo); // Adds it to the map
     }
@@ -48,7 +47,7 @@ public class CountryInfoEngine {
       throw new CountryNotFoundException(countryName);
     }
 
-    CountryInfo countryInfo = this.countryInfos.get(countryName);
+    Country countryInfo = this.countryInfos.get(countryName);
     return countryInfo.toString();
   }
 }
