@@ -36,18 +36,16 @@ public class CountryInfoEngine {
   }
 
   /**
-   * Given the country name, returns the country info message.
+   * Given the country name, returns the country class.
    *
    * @param countryName the country name
-   * @return the string of the country info
+   * @return the Country class associated with the country code
    */
-  public String getCountryInfo(String countryName) throws CountryNotFoundException {
-    // Checks the country code exists
+  public Country getCountry(String countryName) throws CountryNotFoundException {
     if (!this.countryInfos.containsKey(countryName)) {
       throw new CountryNotFoundException(countryName);
     }
 
-    Country countryInfo = this.countryInfos.get(countryName);
-    return countryInfo.toString();
+    return this.countryInfos.get(countryName);
   }
 }
