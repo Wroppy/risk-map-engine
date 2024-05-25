@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import nz.ac.auckland.se281.CountryNotFoundException;
+
 /** This class handles parsing the country data and printing the country info. */
 public class CountryInfoEngine {
   private Map<String, CountryInfo> countryInfos;
@@ -40,7 +42,13 @@ public class CountryInfoEngine {
    * @param countryName the country name
    * @return the string of the country info
    */
-  public String getCountryInfo(String countryName) {
-    return this.countryInfos.get(countryName).toString();
+  public String getCountryInfo(String countryName) throws CountryNotFoundException {
+    // Checks the country code exists
+    if (!this.countryInfos.containsKey(countryName)) {
+      throw new CountryNotFoundException(countryName);
+    }
+
+    CountryInfo countryInfo = this.countryInfos.get(countryName);
+    return countryInfo.toString();
   }
 }

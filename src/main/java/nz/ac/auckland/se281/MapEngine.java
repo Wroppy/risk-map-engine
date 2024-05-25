@@ -1,7 +1,6 @@
 package nz.ac.auckland.se281;
 
 import java.util.List;
-import java.util.Scanner;
 import nz.ac.auckland.se281.countryinfoengine.CountryInfoEngine;
 
 /** This class is the main entry point. */
@@ -25,9 +24,18 @@ public class MapEngine {
   public void showInfoCountry() {
     MessageCli.INSERT_COUNTRY.printMessage();
 
-    String countryName = Utils.scanner.nextLine();
-    String capitalizedCountryName = Utils.capitalizeFirstLetterOfEachWord(countryName);
-    System.out.println(this.countryInfoEngine.getCountryInfo(capitalizedCountryName));
+    while (true) {
+      try {
+        String countryName = Utils.scanner.nextLine();
+        String capitalizedCountryName = Utils.capitalizeFirstLetterOfEachWord(countryName);
+        System.out.println(this.countryInfoEngine.getCountryInfo(capitalizedCountryName));
+
+        return;
+
+      } catch (CountryNotFoundException e) {
+        System.out.println(e.toString());
+      }
+    }
   }
 
   /** this method is invoked when the user run the command route. */
