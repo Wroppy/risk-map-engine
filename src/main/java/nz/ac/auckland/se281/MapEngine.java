@@ -77,6 +77,11 @@ public class MapEngine {
     List<String> continents = this.getContinents(path);
     String continentString = this.getListString(continents);
     MessageCli.CONTINENT_INFO.printMessage(continentString);
+
+    // Prints out the amount of tax fees to travel
+    int taxFees = this.getTaxFees(path);
+    String taxFeesString = String.valueOf(taxFees);
+    MessageCli.TAX_INFO.printMessage(taxFeesString);
   }
 
   private List<String> getContinents(List<String> path) {
@@ -136,5 +141,17 @@ public class MapEngine {
   public Country getDestinationCountry() {
     MessageCli.INSERT_DESTINATION.printMessage();
     return this.getCountryScanner();
+  }
+
+  public int getTaxFees(List<String> path) {
+    int fees = 0;
+
+    for (int i = 1; i < path.size(); i++) {
+      String countryName = path.get(i);
+      Country country = this.countryInfoEngine.getCountry(countryName);
+      fees += country.getTaxFees();
+    }
+
+    return fees;
   }
 }

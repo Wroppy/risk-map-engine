@@ -80,4 +80,8 @@ public class Country {
   public String getContinent() {
     return this.continent;
   }
+
+  public int getTaxFees() {
+    return this.taxFees;
+  }
 }
