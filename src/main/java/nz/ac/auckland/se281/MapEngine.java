@@ -54,5 +54,35 @@ public class MapEngine {
   }
 
   /** this method is invoked when the user run the command route. */
-  public void showRoute() {}
+  public void showRoute() {
+    // Gets the start and end countries from the user
+    Country sourceCountry = this.getSourceCountry();
+    Country destinationCountry = this.getDestinationCountry();
+
+    // Checks if they are equal
+    if (sourceCountry.equals(destinationCountry)) {
+      MessageCli.NO_CROSSBORDER_TRAVEL.printMessage();
+      return;
+    }
+  }
+
+  /**
+   * Asks the user for a starting country.
+   *
+   * @return the country class associated with the country source name
+   */
+  public Country getSourceCountry() {
+    MessageCli.INSERT_SOURCE.printMessage();
+    return this.getCountryScanner();
+  }
+
+  /**
+   * Asks the user for a destination country.
+   *
+   * @return the country class associated with the country destination name
+   */
+  public Country getDestinationCountry() {
+    MessageCli.INSERT_DESTINATION.printMessage();
+    return this.getCountryScanner();
+  }
 }
