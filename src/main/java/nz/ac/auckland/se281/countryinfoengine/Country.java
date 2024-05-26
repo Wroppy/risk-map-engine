@@ -81,6 +81,11 @@ public class Country {
     return this.continent;
   }
 
+  /**
+   * A getter for the tax fees attribute.
+   *
+   * @return the tax fee
+   */
   public int getTaxFees() {
     return this.taxFees;
   }

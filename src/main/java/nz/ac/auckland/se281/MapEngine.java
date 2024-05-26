@@ -143,9 +143,17 @@ public class MapEngine {
     return this.getCountryScanner();
   }
 
+  /**
+   * Calculates the amount of tax fees along each border traveled. Note that the initial country is
+   * not added.
+   *
+   * @param path the route between two countries
+   * @return the amount of tax fees to be paid
+   */
   public int getTaxFees(List<String> path) {
     int fees = 0;
 
+    // Loops through but the initial country to print the total tax fees
     for (int i = 1; i < path.size(); i++) {
       String countryName = path.get(i);
       Country country = this.countryInfoEngine.getCountry(countryName);
