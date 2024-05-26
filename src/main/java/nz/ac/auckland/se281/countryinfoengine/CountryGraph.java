@@ -23,17 +23,17 @@ public class CountryGraph {
    */
   private void parseAdjacencies(List<String> adjacencies) {
     for (String line : adjacencies) {
-      String[] adjacency_data = line.split(",");
+      String[] adjacencyData = line.split(",");
 
       // Puts an empty array in the map
-      String node = adjacency_data[0];
+      String node = adjacencyData[0];
       if (!this.adjNodes.containsKey(node)) {
         this.adjNodes.put(node, new ArrayList<String>());
       }
 
       // Loops through the adjacent nodes and adds it to the hash map
-      for (int i = 1; i < adjacency_data.length; i++) {
-        this.adjNodes.get(node).add(adjacency_data[i]);
+      for (int i = 1; i < adjacencyData.length; i++) {
+        this.adjNodes.get(node).add(adjacencyData[i]);
       }
     }
   }

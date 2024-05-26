@@ -15,7 +15,7 @@ public class CountryEngine {
    * Sets up initial class attributes.
    *
    * @param countries the list of countries in the format of [name],[continent],[taxFees]
-   * @param adjacencies
+   * @param adjacencies the list of country adjacencies from the text file
    */
   public CountryEngine(List<String> countries, List<String> adjacencies) {
     countryInfos = new HashMap<>();
