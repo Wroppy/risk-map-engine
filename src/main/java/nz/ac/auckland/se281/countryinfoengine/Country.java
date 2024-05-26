@@ -52,4 +52,13 @@ public class Country {
     } else if (!name.equals(other.name)) return false;
     return true;
   }
+
+  /**
+   * A getter for the name attribute.
+   *
+   * @return the name
+   */
+  public String getName() {
+    return this.name;
+  }
 }

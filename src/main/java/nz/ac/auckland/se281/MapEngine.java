@@ -64,6 +64,33 @@ public class MapEngine {
       MessageCli.NO_CROSSBORDER_TRAVEL.printMessage();
       return;
     }
+
+    // Gets the shortest path from the source to the destination
+    List<String> path = this.countryInfoEngine.getShortestPath(sourceCountry, destinationCountry);
+
+    // Prints out the path to the user in the format [start, ..., end] 
+    String pathString = this.getPathString(path);
+    MessageCli.ROUTE_INFO.printMessage(pathString);
+  }
+
+  /**
+   * Given the list of a path, returns the string displaying the path to the user.
+   *
+   * @param path the list of the path
+   * @return the string representing the path taken to the user
+   */
+  public String getPathString(List<String> path) {
+    // Gets the string builder and starts adding the country paths.
+    StringBuilder pathString = new StringBuilder();
+    pathString.append("[").append(path.get(0));
+
+    // Loops through all elements apart from the first and adds it
+    for (int i = 1; i < path.size(); i++) {
+      pathString.append(", ").append(path.get(i));
+    }
+    pathString.append("]");
+
+    return pathString.toString();
   }
 
   /**
