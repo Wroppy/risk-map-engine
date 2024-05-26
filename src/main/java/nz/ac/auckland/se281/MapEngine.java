@@ -1,5 +1,6 @@
 package nz.ac.auckland.se281;
 
+import java.util.LinkedList;
 import java.util.List;
 import nz.ac.auckland.se281.countryinfoengine.Country;
 import nz.ac.auckland.se281.countryinfoengine.CountryEngine;
@@ -68,29 +69,53 @@ public class MapEngine {
     // Gets the shortest path from the source to the destination
     List<String> path = this.countryInfoEngine.getShortestPath(sourceCountry, destinationCountry);
 
-    // Prints out the path to the user in the format [start, ..., end] 
-    String pathString = this.getPathString(path);
+    // Prints out the path to the user in the format [start, ..., end]
+    String pathString = this.getListString(path);
     MessageCli.ROUTE_INFO.printMessage(pathString);
+
+    // Prints out the continents that the user travels in the format [start, ..., end]
+    List<String> continents = this.getContinents(path);
+    String continentString = this.getListString(continents);
+    MessageCli.CONTINENT_INFO.printMessage(continentString);
+  }
+
+  private List<String> getContinents(List<String> path) {
+    List<String> continents = new LinkedList<>();
+
+    // Loops through all the countries to get the continents
+    for (String countryName : path) {
+      Country country = this.countryInfoEngine.getCountry(countryName);
+
+      // Checks that the continent isn't already in the list
+      String continent = country.getContinent();
+      if (continents.contains(continent)) {
+        continue;
+      }
+
+      continents.add(continent);
+    }
+
+    return continents;
   }
 
   /**
-   * Given the list of a path, returns the string displaying the path to the user.
+   * Given a list of strings, returns the elements in a comma separated string.
    *
-   * @param path the list of the path
-   * @return the string representing the path taken to the user
+   * @param list the list to be printed out
+   * @return the string representing the elements of the list in order
    */
-  public String getPathString(List<String> path) {
+  public String getListString(List<String> list) {
     // Gets the string builder and starts adding the country paths.
-    StringBuilder pathString = new StringBuilder();
-    pathString.append("[").append(path.get(0));
+    StringBuilder string = new StringBuilder();
+    string.append("[").append(list.get(0));
 
     // Loops through all elements apart from the first and adds it
-    for (int i = 1; i < path.size(); i++) {
-      pathString.append(", ").append(path.get(i));
+    for (int i = 1; i < list.size(); i++) {
+      string.append(", ").append(list.get(i));
     }
-    pathString.append("]");
+    string.append("]");
 
-    return pathString.toString();
+    return string.toString();
   }
 
   /**

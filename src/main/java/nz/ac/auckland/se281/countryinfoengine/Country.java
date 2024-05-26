@@ -71,4 +71,13 @@ public class Country {
   public String getName() {
     return this.name;
   }
+
+  /**
+   * A getter for the continent attribute.
+   *
+   * @return the continent the country is located in
+   */
+  public String getContinent() {
+    return this.continent;
+  }
 }
