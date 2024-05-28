@@ -1,7 +1,9 @@
 package nz.ac.auckland.se281;
 
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import nz.ac.auckland.se281.countryinfoengine.Country;
 import nz.ac.auckland.se281.countryinfoengine.CountryEngine;
 
@@ -38,7 +40,7 @@ public class MapEngine {
    *
    * @return the country associated with the user input
    */
-  public Country getCountryScanner() {
+  private Country getCountryScanner() {
     while (true) { // Loops until the user gets a valid country
       try {
         // Gets the user input
@@ -74,8 +76,9 @@ public class MapEngine {
     MessageCli.ROUTE_INFO.printMessage(pathString);
 
     // Prints out the continents that the user travels in the format [start, ..., end]
-    List<String> continents = this.getContinents(path);
-    String continentString = this.getListString(continents);
+    Set<String> continents = this.getContinents(path);
+    List<String> continentsList = this.setToString(continents); // Converts to list
+    String continentString = this.getListString(continentsList);
     MessageCli.CONTINENT_INFO.printMessage(continentString);
 
     // Prints out the amount of tax fees to travel
@@ -84,8 +87,9 @@ public class MapEngine {
     MessageCli.TAX_INFO.printMessage(taxFeesString);
   }
 
-  private List<String> getContinents(List<String> path) {
-    List<String> continents = new LinkedList<>();
+  private Set<String> getContinents(List<String> path) {
+    // Uses hash set to remove continents.
+    Set<String> continents = new LinkedHashSet<>();
 
     // Loops through all the countries to get the continents
     for (String countryName : path) {
@@ -93,14 +97,15 @@ public class MapEngine {
 
       // Checks that the continent isn't already in the list
       String continent = country.getContinent();
-      if (continents.contains(continent)) {
-        continue;
-      }
-
       continents.add(continent);
     }
-
     return continents;
+  }
+
+  private List<String> setToString(Set<String> set) {
+    List<String> list = new LinkedList<>();
+    list.addAll(set);
+    return list;
   }
 
   /**
@@ -109,7 +114,7 @@ public class MapEngine {
    * @param list the list to be printed out
    * @return the string representing the elements of the list in order
    */
-  public String getListString(List<String> list) {
+  private String getListString(List<String> list) {
     // Gets the string builder and starts adding the country paths.
     StringBuilder string = new StringBuilder();
     string.append("[").append(list.get(0));
@@ -128,7 +133,7 @@ public class MapEngine {
    *
    * @return the country class associated with the country source name
    */
-  public Country getSourceCountry() {
+  private Country getSourceCountry() {
     MessageCli.INSERT_SOURCE.printMessage();
     return this.getCountryScanner();
   }
@@ -138,7 +143,7 @@ public class MapEngine {
    *
    * @return the country class associated with the country destination name
    */
-  public Country getDestinationCountry() {
+  private Country getDestinationCountry() {
     MessageCli.INSERT_DESTINATION.printMessage();
     return this.getCountryScanner();
   }
@@ -150,7 +155,7 @@ public class MapEngine {
    * @param path the route between two countries
    * @return the amount of tax fees to be paid
    */
-  public int getTaxFees(List<String> path) {
+  private int getTaxFees(List<String> path) {
     int fees = 0;
 
     // Loops through but the initial country to print the total tax fees
