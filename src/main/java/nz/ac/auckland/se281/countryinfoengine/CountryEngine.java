@@ -50,7 +50,7 @@ public class CountryEngine {
    * @param countryName the country name
    * @return the Country class associated with the country code
    */
-  public Country getCountry(String countryName) throws CountryNotFoundException {
+  public Country getCountry(String countryName) {
     if (!this.countryInfos.containsKey(countryName)) {
       throw new CountryNotFoundException(countryName);
     }
