@@ -102,6 +102,11 @@ public class MapEngine {
     return continents;
   }
 
+  /**
+   * Converts a set of type string to a list of type string
+   * @param set the set to be converted
+   * @return the converted list
+   */
   private List<String> setToString(Set<String> set) {
     List<String> list = new LinkedList<>();
     list.addAll(set);
