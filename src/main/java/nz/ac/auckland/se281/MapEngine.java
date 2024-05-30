@@ -103,8 +103,9 @@ public class MapEngine {
   }
 
   /**
-   * Converts a set of type string to a list of type string
-   * @param set the set to be converted
+   * Converts a set of type string to a list of type string.
+   *
+   * @param set the set to be converted to a list
    * @return the converted list
    */
   private List<String> setToString(Set<String> set) {
